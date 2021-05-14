@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded", () => {
   ("use strict");
-  const togglePopUp = () => {
-    const popupButtons = document.querySelectorAll(".callback-btn"),
+  const togglePopUp = (formIdString) => {
+    const popupButtons = document.querySelectorAll(`.${formIdString}`),
       popup = document.querySelector(".modal-callback"),
       overlay = document.querySelector(".modal-overlay"),
       closePopUpButton = document.querySelector(".modal-close"),
@@ -37,22 +37,22 @@ window.addEventListener("DOMContentLoaded", () => {
     closePopUpButton.addEventListener("click", () => {
       popup.style.display = "none";
       overlay.style.display = "none";
-    })
+    });
     overlay.addEventListener("click", (e) => {
       let target = e.target;
       // если нажимаем кнопку "Закрыть" или нажимаем вне области окна, то закрываем его
       console.log(target);
       if (
         target.classList.contains("modal-close") ||
-        (!target.closest(".modal-callback") &&
-          !target.closest(".header__button"))
+        (!target.closest(".modal-callback"))
       ) {
         popup.style.display = "none";
         overlay.style.display = "none";
       }
     });
   };
-  togglePopUp();
+  togglePopUp("callback-btn");
+  togglePopUp("fancyboxModal");
   const topMenu = document.querySelector('.top-menu');
   const scrollLinks = topMenu.querySelectorAll("a");
 
