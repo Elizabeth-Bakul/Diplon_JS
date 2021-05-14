@@ -1022,9 +1022,6 @@ video#video_background {
 .accordeon .element.active .title:before {
 	background: url(../images/minus.png) 50% 50% no-repeat #333;
 }
-.accordeon > div:first-of-type .element-content {
-	display: block;
-}
 .accordeon .element .title:hover:before {
 	background-color: #333;
 }
@@ -1224,8 +1221,14 @@ video#video_background {
 	padding: 0 2px;
 	cursor: pointer;
 	background-color: rgba(0, 0, 0, 0.6);
+	display: none
 }
-
+.up:hover {
+	background-color: rgba(255, 255, 255, 0.616);
+}
+.up-show {
+  display: block;
+}
 @media only screen and (min-width: 992px) {
 	.services-elements > .row > hr:nth-of-type(2n) {
 		clear: none;
