@@ -159,7 +159,7 @@ window.addEventListener("DOMContentLoaded", () => {
       // удаляем стили у текущего слайда и пагинации
       prevSlide(dots, currentSlide, "slick-active");
       prevSlide(slides, currentSlide, "item-active");
-      prevSlide(table, currentSlide, "dot-active");
+      prevSlide(table, currentSlide, "active");
 
       // обработка клика по кнопке или пагинации
       if (target.matches(".dot")) {
