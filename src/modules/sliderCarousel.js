@@ -126,3 +126,4 @@ class SliderCarousel {
     window.addEventListener("resize", checkResponse);
   }
 }
+export default SliderCarousel;
