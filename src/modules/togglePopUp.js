@@ -1,9 +1,9 @@
-const togglePopUp = (formIdString) => {
-  const popupButtons = document.querySelectorAll(`.${formIdString}`),
-    popup = document.querySelector(".modal-callback"),
+const togglePopUp = (formIdString, buttonIdString, closeString) => {
+  const popupButtons = document.querySelectorAll(`.${buttonIdString}`),
+    popup = document.querySelector(`.${formIdString}`),
     overlay = document.querySelector(".modal-overlay"),
-    closePopUpButton = document.querySelector(".modal-close"),
-    popUpContent = document.querySelector(".modal-callback");
+    closePopUpButton = document.querySelector(`.${closeString}`),
+    popUpContent = document.querySelector(`.${formIdString}`);
 
   let idInterval,
     count = 0;
@@ -40,8 +40,8 @@ const togglePopUp = (formIdString) => {
     let target = e.target;
     // если нажимаем кнопку "Закрыть" или нажимаем вне области окна, то закрываем его
     if (
-      target.classList.contains("modal-close") ||
-      !target.closest(".modal-callback")
+      target.classList.contains(`${closeString}`) ||
+      !target.closest(`.${formIdString}`)
     ) {
       popup.style.display = "none";
       overlay.style.display = "none";

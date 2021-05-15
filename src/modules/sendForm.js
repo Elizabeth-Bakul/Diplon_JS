@@ -1,10 +1,12 @@
-const sendForm = (formIdString) => {
+const sendForm = (formIdString, modalString) => {
   const errorMessage = "Ошибка",
     loadMessage = "Загрузка...",
     successMessage = "Спасибо! Мы скоро с вами свяжемся!";
 
   const form = document.getElementById(formIdString), // форма для заполнения заявки
-    statusMessageElement = document.createElement("div"), // сообщение о статусе отправки заявки
+    statusMessageElement = document.createElement("div"),
+    popup = document.querySelector(`.${modalString}`),
+    overlay = document.querySelector(".modal-overlay"), // сообщение о статусе отправки заявки
     inputs = document.querySelectorAll(`#${formIdString} input`); // все inputs из формы
 
   statusMessageElement.style.cssText = "text-align: center; color: black";
@@ -44,7 +46,13 @@ const sendForm = (formIdString) => {
       e.target.value = e.target.value.replace(/[^А-Яа-яЁё\s]|/g, "");
     }
   });
-
+  form.addEventListener("input", (e) => {
+    if (e.target.matches('input[name="message"]')) {
+      e.target.value = e.target.value.replace(
+        /[^А-Яа-яЁё\d\s,\.\?\(\)\*\+\$-:;!'"@&%#№]/g,
+        ""
+      );}
+  });
   // Слушатель формы
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -60,13 +68,18 @@ const sendForm = (formIdString) => {
 
     // отправка данных и уведомление пользователя
     postData(body)
-      .then(() => (statusMessageElement.textContent = successMessage))
+      .then(() => {statusMessageElement.textContent = successMessage;
+        setTimeout(() => {
+          overlay.style.display = "none";
+          popup.style.display = "none"}, 7000); 
+      })
       .catch((error) => {
         statusMessageElement.textContent = errorMessage;
         console.log(error);
       });
 
     inputs.forEach((item) => (item.value = "")); // очистка input после отправки данных
+    setTimeout(() => statusMessageElement.remove(), 5000); 
   });
 };
 export default sendForm;

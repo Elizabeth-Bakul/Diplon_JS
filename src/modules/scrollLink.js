@@ -7,10 +7,10 @@ const scrollLink = () => {
       event.preventDefault();
       const id = scrollLink.getAttribute("href");
       if (id !== "#callback") {
-        document.querySelector(id).scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+        let element = document.querySelector(id);
+        let yOffset=-100;
+        let y=element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
       }
     });
   }
